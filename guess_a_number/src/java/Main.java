@@ -20,7 +20,7 @@ public class Main {
             name = sc.nextLine();
 
             hasLettersOnly = name.matches("[a-zA-Z]+");
-            System.out.println(hasLettersOnly);
+            //System.out.println(hasLettersOnly);
 
             if(!hasLettersOnly) {
                 while (!hasLettersOnly) {
