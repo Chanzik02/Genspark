@@ -13,22 +13,29 @@ public class Main {
         System.out.println("Which cave will you go into? (1 or 2)");
 
         Scanner sc = new Scanner(System.in);
-        String aNumber = sc.nextLine();
 
-        if(Integer.parseInt(aNumber) == 1) {
-            System.out.println("You did not get eaten.");
-            sc.close();
+        try {
+
+            String aNumber = sc.nextLine();
+
+            if(Integer.parseInt(aNumber) == 1) {
+                System.out.println("You did not get eaten.");
+                sc.close();
+            }
+            else if(Integer.valueOf(aNumber).doubleValue() == 2) {
+                System.out.println("You approach the cave...");
+                System.out.println("It is dark and spooky...");
+                System.out.println("A large dragon jumps out in front of you! He opens his jaws and...");
+                System.out.println("Gobbles you down in one bite.");
+                sc.close();
+            }
+            else {
+                System.out.println("Please choose the number 1 or 2.");
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-        else if(Integer.valueOf(aNumber).doubleValue() == 2) {
-            System.out.println("You approach the cave...");
-            System.out.println("It is dark and spooky...");
-            System.out.println("A large dragon jumps out in front of you! He opens his jaws and...");
-            System.out.println("Gobbles you down in one bite.");
-            sc.close();
-        }
-        else {
-            System.out.println("Please choose the number 1 or 2.");
-        }
+
 
 
         sc.close();
