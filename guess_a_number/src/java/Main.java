@@ -1,9 +1,13 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
+        Main main = new Main();
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
         String name = "";
@@ -13,17 +17,19 @@ public class Main {
         Boolean hasLettersOnly = true;
         //Boolean isRunning = true;
 
-        try {
 
+        try {
             System.out.println("Hello! What is your name?");
+
 
             name = sc.nextLine();
 
-            hasLettersOnly = name.matches("[a-zA-Z]+");
+            ;
+            hasLettersOnly = main.checkName(name);
             //System.out.println(hasLettersOnly);
 
-            if(!hasLettersOnly) {
-                while (!hasLettersOnly) {
+            if(hasLettersOnly == false) {
+                while (hasLettersOnly == false) {
                     System.out.println("Your name should only include letters.");
 
                     System.out.println("Hello! What is your name?");
@@ -45,7 +51,7 @@ public class Main {
 
                 System.out.println("Well " + name + " I am thinking of a number between 1 and 20.");
                 System.out.println("Take a guess.");
-                System.out.println(aRandomNumber);
+                //System.out.println(aRandomNumber);
 
                 String choice = sc.nextLine();
                 int choiceAsInt = Integer.parseInt(choice);
@@ -117,8 +123,15 @@ public class Main {
         }
 
 
+    }
 
-
+    public boolean checkName(String input) {
+        Boolean a = input.matches("[a-zA-Z]+");
+        if(a == true) {
+            return true;
+        }else {
+            return false;
+        }
 
     }
 }
