@@ -1,2 +1,2 @@
-# Pyramid-Academy
+# GenSpark
 This is my work.
