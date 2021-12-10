@@ -24,7 +24,6 @@ public class Main {
         } catch (Exception e) {
             throw new InputMismatchException("That is not number");
         }
-
     }
 
     /*
