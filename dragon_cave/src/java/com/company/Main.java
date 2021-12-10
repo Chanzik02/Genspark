@@ -16,8 +16,6 @@ public class Main {
         "The other dragon\nis greedy and hungry and will eat you on sight.");
         System.out.println("Which cave will you go into? (1 or 2)");
 
-
-
         try {
             Scanner sc = new Scanner(System.in);
             int aNumber = sc.nextInt();
@@ -26,9 +24,6 @@ public class Main {
         } catch (Exception e) {
             throw new InputMismatchException("That is not number");
         }
-
-
-
 
     }
 
@@ -66,7 +61,4 @@ public class Main {
         return null;
     }
 
-    public String hello() {
-        return "hello";
-    }
 }
