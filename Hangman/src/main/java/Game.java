@@ -10,7 +10,7 @@ public class Game {
 
 
     /*
-     *Method provide a random word from selection
+     *Method provides a random word from selection
      *hello, mower, or scooby
      */
     public String selectionOfWords() {

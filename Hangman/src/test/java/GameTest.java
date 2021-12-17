@@ -10,14 +10,17 @@ class GameTest {
         game = new Game();
     }
 
+
+    @DisplayName("Chooses a random word in inventory.")
     @org.junit.jupiter.api.Test
-    void display() {
+    void selectionOfWords1() {
+        assertNotEquals("help", game.selectionOfWords(), "Failed word is in inventory.");
     }
 
     @DisplayName("Chooses a random word in inventory.")
     @org.junit.jupiter.api.Test
-    void selectionOfWords() {
-        assertNotEquals("help", game.selectionOfWords(), "Failed word is in inventory.");
+    void selectionOfWords2() {
+        assertEquals("null", game.selectionOfWords(), "Failed word is in inventory.");
     }
 
     @org.junit.jupiter.api.AfterEach
