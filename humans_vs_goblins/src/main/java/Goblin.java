@@ -40,47 +40,6 @@ public class Goblin {
         this.health = health;
     }
 
-    public int moveNorth() {
-        if(this.position - 5 <= 0) {
-            this.health = 0;
-            System.out.println("You have fallen into a trap!");
-        }
-        return this.position - 5;
-    }
-
-    public int moveSouth() {
-        if(this.position + 5 >= 26) {
-            this.health = 0;
-            System.out.println("You have fallen into a lava pool!");
-        }
-        return this.position + 5;
-    }
-
-    public int moveEast() {
-        int[] outOfBounds = new int[]{5, 10, 15, 20, 25};
-        for(int i = 0; i < outOfBounds.length; i++) {
-            if(this.position == outOfBounds[i]) {
-                this.health = 0;
-                System.out.println("You have been attacked by locals!");
-            }
-        }
-        return this.position - 5;
-    }
-
-    public int moveWest() {
-        int[] outOfBounds = new int[]{1, 6, 11, 16, 21};
-        for(int i = 0; i < outOfBounds.length; i++) {
-            if(this.position == outOfBounds[i]) {
-                this.health = 0;
-                System.out.println("You don't feel like fighting anymore!");
-            }
-        }
-        return this.position - 5;
-    }
-
-    public int attackHuman(Human human) {
-        return this.attackPower - human.getHealth();
-    }
 
     public String toString(){
         return "GOBLIN ";

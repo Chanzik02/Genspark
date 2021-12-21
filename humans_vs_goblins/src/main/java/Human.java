@@ -80,8 +80,14 @@ public class Human {
         return this.position - 5;
     }
 
-    public int attackGoblin(Goblin goblin) {
-        return this.attackPower - goblin.getHealth();
+    public void attackGoblin(Goblin goblin) {
+        if (this.attackPower >= goblin.getHealth()) {
+            goblin.setHealth(0);
+        }
+        else {
+            goblin.setHealth(this.attackPower - goblin.getHealth());
+        }
+
     }
 
     public String toString(){

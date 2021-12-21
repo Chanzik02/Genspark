@@ -69,9 +69,35 @@ public class Land {
         return goblin.getPosition();
     }
 
+    public void combat(Human human, Goblin goblin) {
+        if (human.getPosition() == goblin.getPosition() + 1 ||
+                human.getPosition() == goblin.getPosition() - 1 ||
+                human.getPosition() == goblin.getPosition() + 5 ||
+                human.getPosition() == goblin.getPosition() - 5)
+        {
+            human.attackGoblin(goblin);
+            System.out.println(human.getHealth());
+            System.out.println(goblin.getHealth());
+        }
+    }
+
+    public boolean didGoblinsWin(ArrayList<Object> a, Human human, Goblin goblin) {
+        if (!a.contains(goblin)) {
+            System.out.println("Humans win!");
+            return false;
+        } else if (!a.contains(human)) {
+            System.out.println("Goblins win!");
+            return true;
+        }
+        System.out.println("still fighting");
+            return false;
+
+    }
+
 
     public String toString() {
         return "War between Humans and Goblins";
     }
+
 
 }
