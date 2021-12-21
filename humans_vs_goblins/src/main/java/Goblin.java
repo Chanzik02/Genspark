@@ -83,6 +83,6 @@ public class Goblin {
     }
 
     public String toString(){
-        return "GOBLIN";
+        return "GOBLIN ";
     }
 }

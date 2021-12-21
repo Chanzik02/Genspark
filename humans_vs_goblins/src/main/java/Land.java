@@ -49,6 +49,26 @@ public class Land {
         return human.getPosition();
     }
 
+    public int moveGoblinNorth(Goblin goblin) {
+        goblin.setPosition(goblin.getPosition() - 5);
+        return goblin.getPosition();
+    }
+
+    public int moveGoblinSouth(Goblin goblin) {
+        goblin.setPosition(goblin.getPosition() + 5);
+        return goblin.getPosition();
+    }
+
+    public int moveGoblinEast(Goblin goblin) {
+        goblin.setPosition(goblin.getPosition() + 1);
+        return goblin.getPosition();
+    }
+
+    public int moveGoblinWest(Goblin goblin) {
+        goblin.setPosition(goblin.getPosition() - 1);
+        return goblin.getPosition();
+    }
+
 
     public String toString() {
         return "War between Humans and Goblins";
