@@ -4,7 +4,6 @@ public class Human {
     private int position;
     private int attackPower;
     private int health;
-    private int move;
     private boolean isAlive;
 
 
@@ -81,7 +80,11 @@ public class Human {
         return this.position - 5;
     }
 
+    public int attackGoblin(Goblin goblin) {
+        return this.attackPower - goblin.getHealth();
+    }
+
     public String toString(){
-        return "I am a human ready for battle!";
+        return "HUMAN";
     }
 }
