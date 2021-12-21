@@ -85,6 +85,6 @@ public class Human {
     }
 
     public String toString(){
-        return "HUMAN";
+        return "HUMAN ";
     }
 }
