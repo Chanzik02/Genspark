@@ -24,136 +24,130 @@ public class Driver2 {
         gridArrayList.set(human.getPosition(), human);
         land.updateGame(gridArrayList);
 
-        //while ()
-        int i = 9;
-        boolean isPlaying = true;
-        boolean isHumanTurn = true;
-        boolean isGoblinTurn = true;
 
-        while (isPlaying) {
+        while(gridArrayList.contains(human) && gridArrayList.contains(goblin))   {
 
 
-                if (!gridArrayList.contains(human)) {
-                    System.out.println("Goblins got win!");
-                    isPlaying = false;
-
-                } else if (!gridArrayList.contains(goblin)) {
-                    System.out.println("Humans got win!");
-                    isPlaying = false;
-                }
                 System.out.println();
                 System.out.println("Human's turn. Choose N, S, E, W");
-                String userInput = sc.nextLine();
+                String firstInput = sc.nextLine();
+                String firstLetter = firstInput.charAt(0) + "";
+                String userInput = firstLetter.toLowerCase();
 
                 switch (userInput) {
-                    case "N": {
+                    case "n": {
                         gridArrayList.set(land.moveNorth(human), human);
                         gridArrayList.set(gridArrayList.lastIndexOf(human), "Safe ");
                         land.updateGame(gridArrayList);
                         land.combat(human, goblin);
-                        isHumanTurn = false;
+                        if (human.getHealth() == 0) {
+                            gridArrayList.set(human.getPosition(), "Safe ");
+
+                        } else if (goblin.getHealth() == 0) {
+                            gridArrayList.set(goblin.getPosition(), "Safe ");
+                        }
                         break;
                     }
-                    case "S": {
+                    case "s": {
                         gridArrayList.set(land.moveSouth(human), human);
                         gridArrayList.set(gridArrayList.indexOf(human), "Safe ");
                         land.updateGame(gridArrayList);
                         land.combat(human, goblin);
-                        isHumanTurn = false;
+                        if (human.getHealth() == 0) {
+                            gridArrayList.set(human.getPosition(), "Safe ");
+
+                        } else if (goblin.getHealth() == 0) {
+                            gridArrayList.set(goblin.getPosition(), "Safe ");
+                        }
                         break;
                     }
-                    case "E": {
+                    case "e": {
                         gridArrayList.set(land.moveEast(human), human);
                         gridArrayList.set(gridArrayList.indexOf(human), "Safe ");
                         land.updateGame(gridArrayList);
                         land.combat(human, goblin);
-                        isHumanTurn = false;
+                        if (human.getHealth() == 0) {
+                            gridArrayList.set(human.getPosition(), "Safe ");
+
+                        } else if (goblin.getHealth() == 0) {
+                            gridArrayList.set(goblin.getPosition(), "Safe ");
+                        }
                         break;
                     }
-                    case "W": {
+                    case "w": {
                         gridArrayList.set(land.moveWest(human), human);
                         gridArrayList.set(gridArrayList.lastIndexOf(human), "Safe ");
                         land.updateGame(gridArrayList);
                         land.combat(human, goblin);
-                        isHumanTurn = false;
+                        if (human.getHealth() == 0) {
+                            gridArrayList.set(human.getPosition(), "Safe ");
+
+                        } else if (goblin.getHealth() == 0) {
+                            gridArrayList.set(goblin.getPosition(), "Safe ");
+                        }
                         break;
                     }
                     default: {
-                        System.out.println("nothing happens");
-                        System.out.println(human.getPosition());
-                        System.out.println(goblin.getPosition());
-                        if (human.getPosition() == goblin.getPosition() + 1 ||
-                                human.getPosition() == goblin.getPosition() - 1 ||
-                                human.getPosition() == goblin.getPosition() + 5 ||
-                                human.getPosition() == goblin.getPosition() - 5) {
-                            human.attackGoblin(goblin);
-                            System.out.println(goblin.getHealth());
-                            if (goblin.getHealth() == 0) {
-                                gridArrayList.set(goblin.getPosition(), "Safe ");
-                                isHumanTurn = false;
-                            }
+                        System.out.println("Attack");
+                        land.combat(human, goblin);
+                        if (human.getHealth() == 0) {
+                            gridArrayList.set(human.getPosition(), "Safe ");
+
+                        } else if (goblin.getHealth() == 0) {
+                            gridArrayList.set(goblin.getPosition(), "Safe ");
                         }
-
                         break;
+                        }
                     }
-                }
-                System.out.println(gridArrayList);
-                isPlaying = land.didGoblinsWin(gridArrayList, human, goblin);
 
 
 
-                
 
-            if (goblin.getHealth() != 0) {
 
-            }
-
+            if(gridArrayList.contains(goblin)) {
                 System.out.println();
                 System.out.println("Goblin's turn. Choose N, S, E, W");
                 userInput = sc.nextLine();
 
                 switch (userInput) {
-                    case "N": {
+                    case "n": {
                         gridArrayList.set(land.moveGoblinNorth(goblin), goblin);
                         gridArrayList.set(gridArrayList.lastIndexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        isGoblinTurn = false;
                         break;
                     }
-                    case "S": {
+                    case "s": {
                         gridArrayList.set(land.moveGoblinSouth(goblin), goblin);
                         gridArrayList.set(gridArrayList.indexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        isGoblinTurn = false;
                         break;
                     }
-                    case "E": {
+                    case "e": {
                         gridArrayList.set(land.moveGoblinEast(goblin), goblin);
                         gridArrayList.set(gridArrayList.indexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        isGoblinTurn = false;
                         break;
                     }
-                    case "W": {
+                    case "w": {
                         gridArrayList.set(land.moveGoblinWest(goblin), goblin);
                         gridArrayList.set(gridArrayList.lastIndexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        isGoblinTurn = false;
                         break;
                     }
                     default: {
                         System.out.println("nothing happens");
-                        isGoblinTurn = false;
                         break;
                     }
 
                 }
+                land.updateGame(gridArrayList);
+            }
 
-                System.out.println(land.didGoblinsWin(gridArrayList, human, goblin));
 
+
+            //System.out.println(land.didGoblinsWin(gridArrayList, human, goblin));
 
 
         }
+
+
+
 
     }
 }
