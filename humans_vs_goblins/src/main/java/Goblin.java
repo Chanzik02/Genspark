@@ -40,6 +40,15 @@ public class Goblin {
         this.health = health;
     }
 
+    public void attackHuman(Human human) {
+        if (this.attackPower >= human.getHealth()) {
+            human.setHealth(0);
+        }
+        else {
+            human.setHealth(human.getHealth() - this.attackPower);
+        }
+
+    }
 
     public String toString(){
         return "GOBLIN ";

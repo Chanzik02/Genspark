@@ -69,29 +69,45 @@ public class Land {
         return goblin.getPosition();
     }
 
-    public void combat(Human human, Goblin goblin) {
+    public void humanCombat(Human human, Goblin goblin) {
         if (human.getPosition() == goblin.getPosition() + 1 ||
                 human.getPosition() == goblin.getPosition() - 1 ||
                 human.getPosition() == goblin.getPosition() + 5 ||
                 human.getPosition() == goblin.getPosition() - 5)
         {
+            System.out.println("Human power: " + human.getAttackPower());
+            System.out.println("Goblin health: " + goblin.getHealth());
             human.attackGoblin(goblin);
-            System.out.println(human.getHealth());
-            System.out.println(goblin.getHealth());
+            System.out.println("Human health: " + human.getHealth());
+            System.out.println("Goblin health: " + goblin.getHealth());
         }
     }
 
-    public boolean didGoblinsWin(ArrayList<Object> a, Human human, Goblin goblin) {
-        if (!a.contains(goblin)) {
-            System.out.println("Humans win!");
-            return false;
-        } else if (!a.contains(human)) {
-            System.out.println("Goblins win!");
-            return true;
+    public void goblinCombat(Goblin goblin, Human human) {
+        if (goblin.getPosition() == human.getPosition() + 1 ||
+                goblin.getPosition() == human.getPosition() - 1 ||
+                goblin.getPosition() == human.getPosition() + 5 ||
+                goblin.getPosition() == human.getPosition() - 5)
+        {
+            System.out.println("Goblin power: " + goblin.getAttackPower());
+            System.out.println("Human health: " + human.getHealth());
+            goblin.attackHuman(human);
+            System.out.println("Goblin health: " + goblin.getHealth());
+            System.out.println("Human health: " + human.getHealth());
         }
-        System.out.println("still fighting");
-            return false;
+    }
 
+    public void removeFromGame(ArrayList<Object> gridArrayList, Human human, Goblin goblin) {
+        if (human.getHealth() == 0) {
+            gridArrayList.set(human.getPosition(), "Safe ");
+
+        }
+        else if (human.getHealth() > 0) {
+            //System.out.println(human.getHealth() + "test");
+        }
+        else if (goblin.getHealth() == 0) {
+            gridArrayList.set(goblin.getPosition(), "Safe ");
+        }
     }
 
 
