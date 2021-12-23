@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Land {
@@ -24,9 +25,6 @@ public class Land {
             System.out.print(grid.get(i));
         }
         System.out.println();
-//        for(int i = 20; i < 25; i++) {
-//            System.out.print(grid.get(i));
-//        }
     }
 
     public int moveNorth(Human human) {
@@ -75,11 +73,13 @@ public class Land {
                 human.getPosition() == goblin.getPosition() + 5 ||
                 human.getPosition() == goblin.getPosition() - 5)
         {
+            System.out.println();
             System.out.println("Human power: " + human.getAttackPower());
             System.out.println("Goblin health: " + goblin.getHealth());
             human.attackGoblin(goblin);
             System.out.println("Human health: " + human.getHealth());
             System.out.println("Goblin health: " + goblin.getHealth());
+            System.out.println();
         }
     }
 
@@ -89,11 +89,13 @@ public class Land {
                 goblin.getPosition() == human.getPosition() + 5 ||
                 goblin.getPosition() == human.getPosition() - 5)
         {
+            System.out.println();
             System.out.println("Goblin power: " + goblin.getAttackPower());
             System.out.println("Human health: " + human.getHealth());
             goblin.attackHuman(human);
             System.out.println("Goblin health: " + goblin.getHealth());
             System.out.println("Human health: " + human.getHealth());
+            System.out.println();
         }
     }
 
@@ -102,9 +104,6 @@ public class Land {
             gridArrayList.set(human.getPosition(), "Safe ");
 
         }
-        else if (human.getHealth() > 0) {
-            //System.out.println(human.getHealth() + "test");
-        }
         else if (goblin.getHealth() == 0) {
             gridArrayList.set(goblin.getPosition(), "Safe ");
         }
@@ -112,7 +111,12 @@ public class Land {
 
 
     public String toString() {
-        return "War between Humans and Goblins";
+        String landString = "War between Humans and Goblins";
+        byte[] bytes = landString.getBytes(StandardCharsets.UTF_8);
+
+        String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
+        return utf8EncodedString + " ";
+//        return "War between Humans and Goblins";
     }
 
 

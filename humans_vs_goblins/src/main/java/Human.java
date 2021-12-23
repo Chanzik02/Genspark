@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
 
 public class Human {
     private int position;
@@ -42,55 +43,25 @@ public class Human {
         this.health = health;
     }
 
-    public int moveNorth() {
-        if(this.position - 5 <= 0) {
-            this.health = 0;
-            System.out.println("You have fallen into a trap!");
-        }
-        return this.position - 5;
-    }
-
-    public int moveSouth() {
-        if(this.position + 5 >= 26) {
-            this.health = 0;
-            System.out.println("You have fallen into a lava pool!");
-        }
-        return this.position + 5;
-    }
-
-    public int moveEast() {
-        int[] outOfBounds = new int[]{5, 10, 15, 20, 25};
-        for(int i = 0; i < outOfBounds.length; i++) {
-            if(this.position == outOfBounds[i]) {
-                this.health = 0;
-                System.out.println("You have been attacked by locals!");
-            }
-        }
-        return this.position - 5;
-    }
-
-    public int moveWest() {
-        int[] outOfBounds = new int[]{1, 6, 11, 16, 21};
-        for(int i = 0; i < outOfBounds.length; i++) {
-            if(this.position == outOfBounds[i]) {
-                this.health = 0;
-                System.out.println("You don't feel like fighting anymore!");
-            }
-        }
-        return this.position - 5;
-    }
 
     public void attackGoblin(Goblin goblin) {
         if (this.attackPower >= goblin.getHealth()) {
             goblin.setHealth(0);
         }
         else {
-            goblin.setHealth(this.attackPower - goblin.getHealth());
+            int afterMathDamage = (int)(Math.random() * 15);
+            goblin.setHealth(goblin.getHealth() - this.attackPower);
+            this.setHealth(this.getHealth() - afterMathDamage);
         }
 
     }
 
     public String toString(){
-        return "HUMAN ";
+        String humanString = "HUMAN";
+        byte[] bytes = humanString.getBytes(StandardCharsets.UTF_8);
+
+        String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
+        return utf8EncodedString + " ";
+//        return "HUMAN";
     }
 }

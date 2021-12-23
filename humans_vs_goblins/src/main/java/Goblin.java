@@ -1,3 +1,5 @@
+import java.nio.charset.StandardCharsets;
+
 public class Goblin {
     private int position;
     private int attackPower;
@@ -45,12 +47,19 @@ public class Goblin {
             human.setHealth(0);
         }
         else {
+            int afterMathDamage = (int)(Math.random() * 25);
             human.setHealth(human.getHealth() - this.attackPower);
+            this.setHealth(this.getHealth() - afterMathDamage);
         }
 
     }
 
     public String toString(){
-        return "GOBLIN ";
+        String goblinString = "GOBLIN";
+        byte[] bytes = goblinString.getBytes(StandardCharsets.UTF_8);
+
+        String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
+        return utf8EncodedString + " ";
+//        return "GOBLIN ";
     }
 }

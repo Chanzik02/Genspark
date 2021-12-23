@@ -11,21 +11,25 @@ public class Driver2 {
         int goblinStartPos = (int)(Math.random() * 19);
         Goblin goblin = new Goblin(goblinStartPos,75,50);
 
-        for(int i = 0; i < 20; i++) {
-            gridArrayList.add("Safe ");
-        }
+        try{
+            System.out.println(land);
+            System.out.println();
+            
+            for(int i = 0; i < 20; i++) {
+                gridArrayList.add("Safe ");
+            }
 
-        if(humanStartPos == goblinStartPos) {
-            gridArrayList.set(0, human);
-            gridArrayList.set(24, goblin);
-        }
+            if(humanStartPos == goblinStartPos) {
+                gridArrayList.set(0, human);
+                gridArrayList.set(19, goblin);
+            }
 
-        gridArrayList.set(goblin.getPosition(), goblin);
-        gridArrayList.set(human.getPosition(), human);
-        land.updateGame(gridArrayList);
+            gridArrayList.set(goblin.getPosition(), goblin);
+            gridArrayList.set(human.getPosition(), human);
+            land.updateGame(gridArrayList);
 
 
-        while(gridArrayList.contains(human) && gridArrayList.contains(goblin))   {
+            while(gridArrayList.contains(human) && gridArrayList.contains(goblin))   {
 
 
                 System.out.println();
@@ -69,71 +73,82 @@ public class Driver2 {
                     }
                     default: {
                         System.out.println("Human Attack");
+                        land.updateGame(gridArrayList);
                         land.humanCombat(human, goblin);
                         land.removeFromGame(gridArrayList, human, goblin);
                         break;
-                        }
                     }
-
-
-
-
-
-            if(gridArrayList.contains(goblin)) {
-                System.out.println();
-                System.out.println("Goblin's turn. Choose N, S, E, W \nPress any other button to attack.");
-                firstInput = sc.nextLine();
-                firstLetter = firstInput.charAt(0) + "";
-                userInput = firstLetter.toLowerCase();
-
-                switch (userInput) {
-                    case "n": {
-                        gridArrayList.set(land.moveGoblinNorth(goblin), goblin);
-                        gridArrayList.set(gridArrayList.lastIndexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        land.goblinCombat(goblin, human);
-                        land.removeFromGame(gridArrayList, human, goblin);
-                        break;
-                    }
-                    case "s": {
-                        gridArrayList.set(land.moveGoblinSouth(goblin), goblin);
-                        gridArrayList.set(gridArrayList.indexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        land.goblinCombat(goblin, human);
-                        land.removeFromGame(gridArrayList, human, goblin);
-                        break;
-                    }
-                    case "e": {
-                        gridArrayList.set(land.moveGoblinEast(goblin), goblin);
-                        gridArrayList.set(gridArrayList.indexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        land.goblinCombat(goblin, human);
-                        land.removeFromGame(gridArrayList, human, goblin);
-                        break;
-                    }
-                    case "w": {
-                        gridArrayList.set(land.moveGoblinWest(goblin), goblin);
-                        gridArrayList.set(gridArrayList.lastIndexOf(goblin), "Safe ");
-                        land.updateGame(gridArrayList);
-                        land.goblinCombat(goblin, human);
-                        land.removeFromGame(gridArrayList, human, goblin);
-                        break;
-                    }
-                    default: {
-                        System.out.println("nothing happens");
-                        break;
-                    }
-
                 }
-                land.updateGame(gridArrayList);
+
+
+                if(goblin.getHealth() == 0) {
+                    System.out.println("Human Wins");
+                }
+
+
+
+
+                if(gridArrayList.contains(goblin)) {
+                    System.out.println();
+                    System.out.println("Goblin's turn. Choose N, S, E, W \nPress any other button to attack.");
+                    firstInput = sc.nextLine();
+                    firstLetter = firstInput.charAt(0) + "";
+                    userInput = firstLetter.toLowerCase();
+
+                    switch (userInput) {
+                        case "n": {
+                            gridArrayList.set(land.moveGoblinNorth(goblin), goblin);
+                            gridArrayList.set(gridArrayList.lastIndexOf(goblin), "Safe ");
+                            land.updateGame(gridArrayList);
+                            land.goblinCombat(goblin, human);
+                            land.removeFromGame(gridArrayList, human, goblin);
+                            break;
+                        }
+                        case "s": {
+                            gridArrayList.set(land.moveGoblinSouth(goblin), goblin);
+                            gridArrayList.set(gridArrayList.indexOf(goblin), "Safe ");
+                            land.updateGame(gridArrayList);
+                            land.goblinCombat(goblin, human);
+                            land.removeFromGame(gridArrayList, human, goblin);
+                            break;
+                        }
+                        case "e": {
+                            gridArrayList.set(land.moveGoblinEast(goblin), goblin);
+                            gridArrayList.set(gridArrayList.indexOf(goblin), "Safe ");
+                            land.updateGame(gridArrayList);
+                            land.goblinCombat(goblin, human);
+                            land.removeFromGame(gridArrayList, human, goblin);
+                            break;
+                        }
+                        case "w": {
+                            gridArrayList.set(land.moveGoblinWest(goblin), goblin);
+                            gridArrayList.set(gridArrayList.lastIndexOf(goblin), "Safe ");
+                            land.updateGame(gridArrayList);
+                            land.goblinCombat(goblin, human);
+                            land.removeFromGame(gridArrayList, human, goblin);
+                            break;
+                        }
+                        default: {
+                            System.out.println("Goblin Attack");
+                            land.goblinCombat(goblin, human);
+                            land.removeFromGame(gridArrayList, human, goblin);
+                            break;
+                        }
+
+                    }
+                    land.updateGame(gridArrayList);
+
+                    if(human.getHealth() == 0) {
+                        System.out.println("Goblin Wins");
+                    }
+                }
+
             }
-
-
-
-            //System.out.println(land.didGoblinsWin(gridArrayList, human, goblin));
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
 
 
 
