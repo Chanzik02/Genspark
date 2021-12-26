@@ -45,13 +45,17 @@ public class Human {
 
 
     public void attackGoblin(Goblin goblin) {
-        if (this.attackPower >= goblin.getHealth()) {
-            goblin.setHealth(0);
-        }
-        else {
-            int afterMathDamage = (int)(Math.random() * 15);
-            goblin.setHealth(goblin.getHealth() - this.attackPower);
-            this.setHealth(this.getHealth() - afterMathDamage);
+        try {
+            if (this.attackPower >= goblin.getHealth()) {
+                goblin.setHealth(0);
+            }
+            else {
+                int afterMathDamage = (int)(Math.random() * 15);
+                goblin.setHealth(goblin.getHealth() - this.attackPower);
+                this.setHealth(this.getHealth() - afterMathDamage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

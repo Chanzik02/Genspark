@@ -14,7 +14,7 @@ public class Driver2 {
         try{
             System.out.println(land);
             System.out.println();
-            
+
             for(int i = 0; i < 20; i++) {
                 gridArrayList.add("Safe ");
             }

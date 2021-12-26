@@ -43,15 +43,18 @@ public class Goblin {
     }
 
     public void attackHuman(Human human) {
-        if (this.attackPower >= human.getHealth()) {
-            human.setHealth(0);
+        try {
+            if (this.attackPower >= human.getHealth()) {
+                human.setHealth(0);
+            }
+            else {
+                int afterMathDamage = (int)(Math.random() * 25);
+                human.setHealth(human.getHealth() - this.attackPower);
+                this.setHealth(this.getHealth() - afterMathDamage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            int afterMathDamage = (int)(Math.random() * 25);
-            human.setHealth(human.getHealth() - this.attackPower);
-            this.setHealth(this.getHealth() - afterMathDamage);
-        }
-
     }
 
     public String toString(){
