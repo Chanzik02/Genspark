@@ -46,12 +46,11 @@ public class Game {
             System.out.println("   |");
         }
         else if (a == 2) {
-            System.out.println("|  |");
+            System.out.println("   |");
         }
         else {
-            if (a == 1) {
                 System.out.println("|  |");
-        }
+
 
     } }
 
@@ -65,10 +64,12 @@ public class Game {
         else if(a == 2) {
             System.out.println("   |");
         }
+        else if (a == 1) {
+            System.out.println("   |");
+        }
         else {
-            if(a == 1) {
                 System.out.println("|  |");
-            }
+
         }
 
     }

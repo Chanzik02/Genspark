@@ -72,6 +72,9 @@ public class Playground {
 
                         System.out.println(randomWordUnderscore);
                     }
+                    else if(!randomWord.contains(firstLetter) && missedLetters.contains(firstLetter)) {
+                        System.out.println("you have used this letter already.");
+                    }
                     else {
                         missedLetters = missedLetters + " " + firstLetter;
                         livesCounter--;
@@ -108,6 +111,7 @@ public class Playground {
 
                         }
                         else if (userInput.equals("no")) {
+                            stillPlaying = false;
                             livesCounter = 0;
                         }
                         else {

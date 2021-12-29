@@ -72,6 +72,12 @@ public class Playground {
 
                         System.out.println(randomWordUnderscore);
                     }
+                    else if(!randomWord.contains(firstLetter) && missedLetters.contains(firstLetter)) {
+                        System.out.println("you have used this letter already.");
+                    }
+                    else if (missedLetters.contains(firstLetter)) {
+                        System.out.println("you have used this letter already.");
+                    }
                     else {
                         missedLetters = missedLetters + " " + firstLetter;
                         livesCounter--;
@@ -100,19 +106,35 @@ public class Playground {
 
                     if(livesCounter == 0) {
                         System.out.println("You have lost");
+
+                        System.out.println("+--+");
+                        System.out.println();
+                        game.printAZero(livesCounter);
+                        //System.out.println(hangManLives.get(0));
+                        System.out.println();
+                        game.printLineOne(livesCounter);
+                        //System.out.println(hangManLives.get(1));
+                        System.out.println();
+                        game.printLineTwo(livesCounter);
+                        //System.out.println(hangManLives.get(2));
+                        System.out.println("");
+                        System.out.println("  ===");
+                        System.out.println(game.missedLetters(missedLetters));
+
+                        System.out.println("");
+
                         System.out.println("Do you want to play again? (yes or no)");
                         userInput = sc.nextLine();
                         if(userInput.equals("yes")) {
-                            System.out.println("That is not an option. Ending game.");
                             stillPlaying = true;
-
                         }
                         else if (userInput.equals("no")) {
+                            stillPlaying = false;
                             livesCounter = 0;
                         }
                         else {
                             System.out.println("That is not an option. Ending game.");
-                            stillPlaying = false;
+
                         }
                     }
 
