@@ -134,7 +134,7 @@ public class Playground {
                         }
                         else {
                             System.out.println("That is not an option. Ending game.");
-
+                            stillPlaying = false;
                         }
                     }
 

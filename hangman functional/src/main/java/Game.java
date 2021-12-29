@@ -46,12 +46,11 @@ public class Game {
             System.out.println("   |");
         }
         else if (a == 2) {
-            System.out.println("|  |");
+            System.out.println("   |");
         }
         else {
-            if (a == 1) {
-                System.out.println("|  |");
-            }
+            System.out.println("|  |");
+
 
         } }
 
@@ -65,12 +64,29 @@ public class Game {
         else if(a == 2) {
             System.out.println("   |");
         }
+        else if (a == 1) {
+            System.out.println("   |");
+        }
         else {
-            if(a == 1) {
-                System.out.println("|  |");
-            }
+            System.out.println("|  |");
+
         }
 
+    }
+
+    public String getName(String name) {
+        try {
+            Scanner sc = new Scanner(System.in);
+            while (name.equals("")) {
+                System.out.println("Name must have characters");
+                System.out.print("Enter your name: ");
+                name = sc.nextLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+        return name;
     }
 
     /*
@@ -79,4 +95,5 @@ public class Game {
     public String missedLetters(String a){
         return "Missed Letters: " + a;
     }
+
 }
