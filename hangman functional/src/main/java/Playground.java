@@ -1,6 +1,11 @@
+import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -12,12 +17,18 @@ public class Playground {
     public static void main(String[] args) {
         Game game = new Game();
         Boolean stillPlaying = true;
+        int highScore = 0;
         Scanner sc = new Scanner(System.in);
+        Charset utf8 = StandardCharsets.UTF_8;
 
         try {
             System.out.print("Enter your name: ");
             String name = sc.nextLine();
-            game.getName(name);
+            String checkName = game.getName(name) + "\n";
+            Files.write(Paths
+                    .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
+                    checkName.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
             while (stillPlaying) {
                 ArrayList<String> availableWords = new ArrayList<>();
@@ -70,7 +81,10 @@ public class Playground {
                     System.out.println("");
                     System.out.println("Guess a Letter");
                     String userInput = sc.nextLine();
+                    userInput = game.getFirstLetter(userInput);
                     String firstLetter = userInput.charAt(0) + "";
+
+
 
                     String charIsAt = "";
 
@@ -113,9 +127,18 @@ public class Playground {
 
                         }
                         else if (userInput.equals("no")) {
-                            livesCounter = 0;
+                            Files.write(Paths
+                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
+                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            stillPlaying = false;
                         }
                         else {
+                            Files.write(Paths
+                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
+                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            System.out.println("That is not an option. Ending game.");
                             stillPlaying = false;
                         }
 
@@ -150,10 +173,17 @@ public class Playground {
                             stillPlaying = true;
                         }
                         else if (userInput.equals("no")) {
+                            Files.write(Paths
+                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
+                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
                             stillPlaying = false;
-                            livesCounter = 0;
                         }
                         else {
+                            Files.write(Paths
+                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
+                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
                             System.out.println("That is not an option. Ending game.");
                             stillPlaying = false;
                         }
