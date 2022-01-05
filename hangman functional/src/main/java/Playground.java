@@ -1,17 +1,12 @@
-import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Playground {
     public static void main(String[] args) {
@@ -22,6 +17,7 @@ public class Playground {
         Charset utf8 = StandardCharsets.UTF_8;
 
         try {
+            game.initialDisplay();
             System.out.print("Enter your name: ");
             String name = sc.nextLine();
             String checkName = game.getName(name) + "\n";
@@ -43,17 +39,12 @@ public class Playground {
                 String missedLetters = "";
 
 
-
-
                 for(int i = 0; i < randomWord.length(); i ++) {
                     randomWordUnderscore.add("_");
                     System.out.print(randomWordUnderscore.get(i));
                 }
 
                 System.out.println();
-
-
-
 
 
                 do {
@@ -67,13 +58,13 @@ public class Playground {
                     System.out.println("+--+");
                     System.out.println();
                     game.printAZero(livesCounter);
-                    //System.out.println(hangManLives.get(0));
+
                     System.out.println();
                     game.printLineOne(livesCounter);
-                    //System.out.println(hangManLives.get(1));
+
                     System.out.println();
                     game.printLineTwo(livesCounter);
-                    //System.out.println(hangManLives.get(2));
+
                     System.out.println("");
                     System.out.println("  ===");
                     System.out.println(game.missedLetters(missedLetters));
@@ -123,10 +114,19 @@ public class Playground {
                         System.out.println("Do you want to play again? (yes or no)");
                         userInput = sc.nextLine();
                         if(userInput.equals("yes")) {
+                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
+                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
                             stillPlaying = true;
 
                         }
                         else if (userInput.equals("no")) {
+                            //records number score only
+                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
+                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
+                            //records entire score
                             Files.write(Paths
                                             .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
                                     game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
@@ -134,6 +134,10 @@ public class Playground {
                             stillPlaying = false;
                         }
                         else {
+                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
+                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
                             Files.write(Paths
                                             .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
                                     game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
@@ -170,16 +174,27 @@ public class Playground {
                         System.out.println("Do you want to play again? (yes or no)");
                         userInput = sc.nextLine();
                         if(userInput.equals("yes")) {
+                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
+                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
                             stillPlaying = true;
                         }
                         else if (userInput.equals("no")) {
+                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
+                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
                             Files.write(Paths
-                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
+                                   .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
                                     game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
                                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
                             stillPlaying = false;
                         }
                         else {
+                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
+                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
+                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
                             Files.write(Paths
                                             .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
                                     game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),

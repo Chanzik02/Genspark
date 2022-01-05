@@ -1,11 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class Game {
 
@@ -126,18 +124,44 @@ public class Game {
         return "\n!!!SCORE!!!" + "\nScore: " + score + "   Lives: " + lives + "   Missed Letters: " + missedLetters + "\n" + "\n";
     }
 
-    public void score(int score) throws IOException {
-//        var a =  Files.write(Paths
-//                .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_highscore"), );
-//        ArrayList<String> myArrayList= new ArrayList<>(a);
-//        Stream<String> myFile =myArrayList.stream().filter(n -> n.contains("lives"));
-//        System.out.println(myArrayList);
+    public void initialDisplay() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_display"));
+        while (sc.hasNextLine()) {
+            System.out.println(sc.nextLine());
+        }
+    }
+
+    public String numberScore(int lives) throws IOException {
+        int score = 0;
+        score = lives * 100;
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(score);
+        return a.get(0).toString() + "\n";
+    }
+
+    public int highScore() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"));
+        int newHighScore = 0;
+        while (sc.hasNextLine()) {
+            var a = Integer.parseInt(sc.next());
+            if (a > newHighScore) {
+                newHighScore = a;
+                sc.close();
+            }
+
+            System.out.println(highScore());
+        }
+        sc.close();
+        return newHighScore;
     }
 
     public static void main(String[] args) throws IOException {
         Game game = new Game();
-        Files.lines(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"));
+//        Files.lines(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"));
+//        game.initialDisplay();
         //game.score();
+        game.highScore();
+
     }
 
 }
