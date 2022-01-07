@@ -1,6 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -104,7 +108,7 @@ public class Game {
     }
 
     /*
-
+     *
      */
     public String missedLetters(String missedLetters){
         return "Missed Letters: " + missedLetters;
@@ -155,13 +159,54 @@ public class Game {
         return newHighScore;
     }
 
-    public static void main(String[] args) throws IOException {
-        Game game = new Game();
-//        Files.lines(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"));
-//        game.initialDisplay();
-        //game.score();
-        game.highScore();
+    public void addUnderScore(String randomWord, ArrayList<String> randomWordUnderscore) {
+        for(int i = 0; i < randomWord.length(); i ++) {
+            randomWordUnderscore.add("_");
+            System.out.print(randomWordUnderscore.get(i));
+        }
+    }
 
+    public void displayState(int livesCounter, String missedLetters) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("H A N G M A N");
+        System.out.println();
+        System.out.println("+--+");
+        System.out.println();
+        this.printAZero(livesCounter);
+
+        System.out.println();
+        this.printLineOne(livesCounter);
+
+        System.out.println();
+        this.printLineTwo(livesCounter);
+
+        System.out.println("");
+        System.out.println("  ===");
+        System.out.println(this.missedLetters(missedLetters));
+
+        System.out.println("");
+        System.out.println("Guess a Letter");
+        String userInput = sc.nextLine();
+        userInput = this.getFirstLetter(userInput);
+    }
+
+    /*
+     *Records entire file
+     */
+    public void updateHighScoreFile(int livesCounter) throws IOException {
+        Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
+                this.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
+    /*
+     *Records entire file
+     */
+    public void updateHangmanScoreFile(int livesCounter, String missedLetters) throws IOException {
+        Files.write(Paths
+                        .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
+                this.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
 }

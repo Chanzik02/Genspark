@@ -37,12 +37,10 @@ public class Playground {
                 int livesCounter = 3;
                 ArrayList<String> randomWordUnderscore = new ArrayList<>();
                 String missedLetters = "";
+                String firstLetter = "";
+                String charIsAt = "";
 
-
-                for(int i = 0; i < randomWord.length(); i ++) {
-                    randomWordUnderscore.add("_");
-                    System.out.print(randomWordUnderscore.get(i));
-                }
+                game.addUnderScore(randomWord, randomWordUnderscore);
 
                 System.out.println();
 
@@ -73,11 +71,8 @@ public class Playground {
                     System.out.println("Guess a Letter");
                     String userInput = sc.nextLine();
                     userInput = game.getFirstLetter(userInput);
-                    String firstLetter = userInput.charAt(0) + "";
+                    firstLetter = userInput.charAt(0) + "";
 
-
-
-                    String charIsAt = "";
 
                     if (randomWord.contains(firstLetter)) {
                         for (int i = 0; i < randomWord.length(); i++) {
@@ -103,8 +98,6 @@ public class Playground {
                     else {
                         missedLetters = missedLetters + " " + firstLetter;
                         livesCounter--;
-
-
                     }
 
 
@@ -114,34 +107,20 @@ public class Playground {
                         System.out.println("Do you want to play again? (yes or no)");
                         userInput = sc.nextLine();
                         if(userInput.equals("yes")) {
-                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
-                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            game.updateHighScoreFile(livesCounter);
                             stillPlaying = true;
 
                         }
                         else if (userInput.equals("no")) {
                             //records number score only
-                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
-                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
+                            game.updateHighScoreFile(livesCounter);
                             //records entire score
-                            Files.write(Paths
-                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
-                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            game.updateHangmanScoreFile(livesCounter, missedLetters);
                             stillPlaying = false;
                         }
                         else {
-                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
-                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
-                            Files.write(Paths
-                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
-                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            game.updateHighScoreFile(livesCounter);
+                            game.updateHangmanScoreFile(livesCounter, missedLetters);
                             System.out.println("That is not an option. Ending game.");
                             stillPlaying = false;
                         }
@@ -174,31 +153,17 @@ public class Playground {
                         System.out.println("Do you want to play again? (yes or no)");
                         userInput = sc.nextLine();
                         if(userInput.equals("yes")) {
-                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
-                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            game.updateHighScoreFile(livesCounter);
                             stillPlaying = true;
                         }
                         else if (userInput.equals("no")) {
-                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
-                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
-                            Files.write(Paths
-                                   .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
-                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            game.updateHighScoreFile(livesCounter);
+                            game.updateHangmanScoreFile(livesCounter, missedLetters);
                             stillPlaying = false;
                         }
                         else {
-                            Files.write(Paths.get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\highScore"),
-                                    game.numberScore(livesCounter).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
-                            Files.write(Paths
-                                            .get("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_score"),
-                                    game.score(livesCounter, missedLetters).getBytes(StandardCharsets.UTF_8),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                            game.updateHighScoreFile(livesCounter);
+                            game.updateHangmanScoreFile(livesCounter, missedLetters);
                             System.out.println("That is not an option. Ending game.");
                             stillPlaying = false;
                         }
