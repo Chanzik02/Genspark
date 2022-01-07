@@ -12,7 +12,6 @@ public class Playground {
     public static void main(String[] args) {
         Game game = new Game();
         Boolean stillPlaying = true;
-        int highScore = 0;
         Scanner sc = new Scanner(System.in);
         Charset utf8 = StandardCharsets.UTF_8;
 
@@ -33,7 +32,6 @@ public class Playground {
                 availableWords.add("courage");
                 Random random = new Random();
                 String randomWord = availableWords.get((random.nextInt(availableWords.size())));
-                //System.out.println(randomWord);
                 int livesCounter = 3;
                 ArrayList<String> randomWordUnderscore = new ArrayList<>();
                 String missedLetters = "";
@@ -47,10 +45,6 @@ public class Playground {
 
                 do {
 
-//                    var lines = Files.lines(Path
-//                            .of("C:\\Pyramid-Academy\\hangman functional\\src\\main\\resources\\hangman_display"))
-//                            .collect(Collectors.toList());
-//                    lines.forEach(System.out::println);
                     System.out.println("H A N G M A N");
                     System.out.println();
                     System.out.println("+--+");
@@ -76,7 +70,6 @@ public class Playground {
 
                     if (randomWord.contains(firstLetter)) {
                         for (int i = 0; i < randomWord.length(); i++) {
-
                             charIsAt = randomWord.charAt(i) + "";
                             if (firstLetter.equals(charIsAt)) {
                                 randomWordUnderscore.set(i, charIsAt);
@@ -86,7 +79,6 @@ public class Playground {
                         if(randomWordUnderscore.contains(firstLetter)) {
                             System.out.println("You have already guessed that letter. Choose again.");
                         }
-
                         System.out.println(randomWordUnderscore);
                     }
                     else if(!randomWord.contains(firstLetter) && missedLetters.contains(firstLetter)) {
@@ -108,8 +100,18 @@ public class Playground {
                         userInput = sc.nextLine();
                         if(userInput.equals("yes")) {
                             game.updateHighScoreFile(livesCounter);
+                            randomWord = availableWords.get((random.nextInt(availableWords.size())));
+                            randomWordUnderscore.clear();
+                            game.addUnderScore(randomWord,randomWordUnderscore);
+                            System.out.println();
+                            livesCounter = 3;
+                            for(String aLine: randomWordUnderscore) {
+                                if (!aLine.equals("_")) {
+                                    randomWordUnderscore.set(randomWordUnderscore.indexOf(aLine), "_");
+                                }
+                            }
+                            missedLetters = "";
                             stillPlaying = true;
-
                         }
                         else if (userInput.equals("no")) {
                             //records number score only
@@ -154,6 +156,17 @@ public class Playground {
                         userInput = sc.nextLine();
                         if(userInput.equals("yes")) {
                             game.updateHighScoreFile(livesCounter);
+                            randomWord = availableWords.get((random.nextInt(availableWords.size())));
+                            randomWordUnderscore.clear();
+                            game.addUnderScore(randomWord,randomWordUnderscore);
+                            System.out.println();
+                            livesCounter = 3;
+                            for(String aLine: randomWordUnderscore) {
+                                if (!aLine.equals("_")) {
+                                    randomWordUnderscore.set(randomWordUnderscore.indexOf(aLine), "_");
+                                }
+                            }
+                            missedLetters = "";
                             stillPlaying = true;
                         }
                         else if (userInput.equals("no")) {

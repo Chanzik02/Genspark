@@ -166,30 +166,6 @@ public class Game {
         }
     }
 
-    public void displayState(int livesCounter, String missedLetters) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("H A N G M A N");
-        System.out.println();
-        System.out.println("+--+");
-        System.out.println();
-        this.printAZero(livesCounter);
-
-        System.out.println();
-        this.printLineOne(livesCounter);
-
-        System.out.println();
-        this.printLineTwo(livesCounter);
-
-        System.out.println("");
-        System.out.println("  ===");
-        System.out.println(this.missedLetters(missedLetters));
-
-        System.out.println("");
-        System.out.println("Guess a Letter");
-        String userInput = sc.nextLine();
-        userInput = this.getFirstLetter(userInput);
-    }
-
     /*
      *Records entire file
      */
